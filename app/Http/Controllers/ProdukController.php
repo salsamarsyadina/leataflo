@@ -49,7 +49,7 @@ class ProdukController extends Controller
         $name = $file->getClientOriginalName();
 
         // simpan ke folder storage/app/public/foto
-        $file->storeAs('public/foto', $name);
+        $file->storeAs('foto', $name, 'public');
 
         // simpan path yang bisa diakses browser ke database
         $produk->foto_produk = 'storage/foto/' . $name;
