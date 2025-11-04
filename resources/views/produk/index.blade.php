@@ -51,11 +51,10 @@
                                ✏️ Edit
                             </a>
                             <form action="{{ route('produk.destroy', $item->id) }}" 
-                                  method="POST" class="d-inline">
+                                  method="POST" class="d-inline delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-outline-danger rounded-pill"
-                                        onclick="return confirm('Yakin ingin hapus produk ini?')">
+                                <button type="button" class="btn btn-sm btn-outline-danger rounded-pill delete-btn">
                                     🗑️ Hapus
                                 </button>
                             </form>
@@ -66,10 +65,10 @@
         </div>
 
         <div class="mt-5 d-flex justify-content-center">
-    <div class="custom-pagination">
-        {{ $produk->links('vendor.pagination.bootstrap-5') }}
-    </div>
-</div>
+            <div class="custom-pagination">
+                {{ $produk->links('vendor.pagination.bootstrap-5') }}
+            </div>
+        </div>
 
     @else
         <p class="text-center text-muted mt-5">Belum ada produk yang ditampilkan 🌷</p>
@@ -107,4 +106,37 @@ body {
     box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
 }
 </style>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            const form = this.closest('form');
+            Swal.fire({
+                title: 'Yakin ingin hapus?',
+                text: "Produk ini akan dihapus secara permanen.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff69b4',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+                background: '#fff9fb',
+                color: '#333',
+                customClass: {
+                    popup: 'rounded-4 shadow'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+</script>
 @endsection

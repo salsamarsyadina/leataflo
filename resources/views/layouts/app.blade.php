@@ -12,6 +12,14 @@
     body {
       background-color: #fff6f9;
       font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Agar tinggi minimum setara tinggi layar */
+      margin: 0;
+    }
+
+    main {
+      flex: 1; /* Isi ruang kosong di antara navbar dan footer */
     }
 
     /* 🌸 Navbar gradasi pink */
@@ -104,7 +112,7 @@
   </main>
 
   <!-- 🌺 Footer -->
-  <footer class="text-center text-white py-3 mt-auto" 
+  <footer class="text-center text-white py-3" 
           style="background: linear-gradient(90deg, #ff9ec4, #ffb6c1);">
     <p class="mb-0 small">© 2025 Leata.flo — Handmade with 💖</p>
   </footer>
